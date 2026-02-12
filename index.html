@@ -11,16 +11,17 @@
 
     <style>
         :root {
-            --primary: #fbbf24; /* Metallic Gold */
-            --accent: #1e293b;  /* Slate */
-            --bg-dark: #0f172a; /* Deep Navy Background */
-            --card-bg: #1e293b; /* Slightly lighter navy */
+            --primary: #fbbf24; 
+            --accent: #1e293b;  
+            --bg-dark: #0f172a; 
+            --card-bg: #1e293b; 
             --text-light: #f8fafc;
             --whatsapp: #22c55e;
+            --danger: #ef4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-dark); color: var(--text-light); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
 
         /* --- Navigation --- */
         nav {
@@ -47,44 +48,45 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
-        /* --- Catalog Grid (6 Items) --- */
+        /* --- Catalog --- */
         .section-title { text-align: center; margin: 4rem 0 2rem; font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--primary); }
-        
         .catalog-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem; padding: 0 5% 5rem; max-width: 1400px; margin: auto;
         }
-
-        .item-card {
-            background: var(--card-bg); border-radius: 15px; overflow: hidden;
-            transition: 0.3s; border: 1px solid rgba(255,255,255,0.05);
-        }
-        .item-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
+        .item-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; transition: 0.3s; border: 1px solid rgba(255,255,255,0.05); }
+        .item-card:hover { transform: translateY(-10px); border-color: var(--primary); }
         .item-img { height: 250px; width: 100%; object-fit: cover; }
         .item-info { padding: 1.5rem; }
         .item-price { color: var(--primary); font-weight: 800; font-size: 1.2rem; margin: 10px 0; }
-        
-        .btn { width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-primary { background: var(--primary); color: var(--bg-dark); }
-        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); margin-top: 10px; }
 
         /* --- Testimonials --- */
         .testimonials { background: #111827; padding: 5rem 5%; }
         .t-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .t-card { background: var(--bg-dark); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--primary); font-style: italic; }
 
-        /* --- Modals --- */
-        .modal-overlay {
-            position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000;
-        }
+        /* --- Admin Dashboard --- */
+        #adminSection { display: none; padding: 5rem 5%; background: #000; border-top: 2px solid var(--primary); }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--card-bg); border-radius: 10px; overflow: hidden; }
+        .admin-table th, .admin-table td { padding: 15px; text-align: left; border-bottom: 1px solid #334155; }
+        .admin-table th { background: var(--primary); color: var(--bg-dark); }
+        .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; }
+        .status-paid { background: #22c55e; color: white; }
+        .status-delivered { background: #3b82f6; color: white; }
+
+        /* --- UI Elements --- */
+        .btn { width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: var(--bg-dark); }
+        .btn-sm { padding: 5px 10px; font-size: 0.75rem; width: auto; margin-right: 5px; display: inline-flex; }
+        .btn-danger { background: var(--danger); color: white; }
+
+        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000; }
         .modal-card { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 400px; }
-        .modal-card input { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
+        .modal-card input { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
+        
+        .wa-float { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; }
 
-        .wa-float { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-
-        @media (max-width: 768px) { .catalog-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 3rem; } }
+        @media (max-width: 768px) { .catalog-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -103,18 +105,38 @@
     </nav>
 
     <header class="hero">
-        <h1 style="font-family: 'Playfair Display';">Masterpiece Walls</h1>
-        <p style="opacity: 0.8; letter-spacing: 3px; font-weight: 300;">PAINT PRODUCTION • SCREEDING • ART GALLERY</p>
+        <h1 style="font-family: 'Playfair Display'; font-size: clamp(2.5rem, 6vw, 4.5rem);">Masterpiece Walls</h1>
+        <p style="opacity: 0.8; letter-spacing: 3px;">PAINT PRODUCTION • ART GALLERY</p>
     </header>
 
-    <h2 class="section-title">The Gallery</h2>
-    <div class="catalog-grid" id="catalogGrid"></div>
+    <section id="catalog">
+        <h2 class="section-title">The Gallery</h2>
+        <div class="catalog-grid" id="catalogGrid"></div>
+    </section>
 
     <section class="testimonials">
         <div class="t-grid">
-            <div class="t-card">"The quality of the satin paint is incredible. Omo-Alhaji is the only place I trust for my projects."<br><br><strong>- Engr. Dele</strong></div>
-            <div class="t-card">"Excellent framing and 3D wallpaper installation. Professional from start to finish."<br><br><strong>- Mrs. Funmi</strong></div>
-            <div class="t-card">"They turned my office into a masterpiece. The gold accents are stunning."<br><br><strong>- Bright Heights Ltd</strong></div>
+            <div class="t-card">"The satin paint quality is incredible. Omo-Alhaji is my only choice."<br><br><strong>- Engr. Dele</strong></div>
+            <div class="t-card">"Excellent framing and 3D wallpaper installation."<br><br><strong>- Mrs. Funmi</strong></div>
+            <div class="t-card">"Turned my office into a gold-accented masterpiece."<br><br><strong>- Bright Heights</strong></div>
+        </div>
+    </section>
+
+    <section id="adminSection">
+        <h2 class="section-title">Admin Dashboard</h2>
+        <div style="overflow-x: auto;">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="adminOrderTable"></tbody>
+            </table>
         </div>
     </section>
 
@@ -122,30 +144,24 @@
         <div class="modal-card">
             <h2 id="modalTitle">Welcome Back</h2>
             <form id="authForm">
-                <div style="margin-top: 15px;">
-                    <label>Email Address</label>
-                    <input type="email" id="loginEmail" placeholder="email@example.com" required>
-                </div>
-                <div style="margin-top: 15px;">
-                    <label>Password</label>
-                    <input type="password" id="loginPass" placeholder="••••••••" required>
-                </div>
+                <input type="email" id="loginEmail" placeholder="Email Address" required>
+                <input type="password" id="loginPass" placeholder="Password" required>
                 <button type="submit" class="btn btn-primary" style="margin-top: 20px;" id="authBtn">Sign In</button>
             </form>
             <p style="text-align: center; margin-top: 15px; font-size: 0.8rem;">
                 <a href="javascript:void(0)" id="switchAuth" style="color: var(--primary);">Need an account? Register</a>
             </p>
-            <button class="btn-outline" style="width:100%; border:none; color:#94a3b8;" onclick="toggleModal('loginModal')">Close</button>
+            <button class="btn" style="color:#94a3b8; margin-top:10px;" onclick="toggleModal('loginModal')">Cancel</button>
         </div>
     </div>
 
     <div class="modal-overlay" id="cartModal">
         <div class="modal-card">
             <h2>Your Bag</h2>
-            <div id="cartItems" style="margin: 20px 0; max-height: 200px; overflow-y: auto;"></div>
-            <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; border-top: 1px solid #334155; padding-top: 10px;">Total: ₦0</div>
-            <button class="btn btn-primary" style="margin-top: 20px;" onclick="payWithPaystack()">Proceed to Payment</button>
-            <button class="btn" onclick="toggleModal('cartModal')" style="color: white;">Continue Shopping</button>
+            <div id="cartItems" style="margin: 20px 0; border-top: 1px solid #334155; padding-top: 10px;"></div>
+            <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">Total: ₦0</div>
+            <button class="btn btn-primary" onclick="payWithPaystack()">Checkout</button>
+            <button class="btn" onclick="toggleModal('cartModal')" style="color: white; margin-top: 10px;">Close</button>
         </div>
     </div>
 
@@ -155,7 +171,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCWv4pF_5hVBqYLl4MZIvndWq5slckZ-1E",
@@ -168,44 +185,89 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // --- Auth Logic ---
+        let currentUser = null;
         let isLoginMode = true;
-        const switchBtn = document.getElementById('switchAuth');
-        const authForm = document.getElementById('authForm');
 
-        switchBtn.addEventListener('click', () => {
+        // --- Auth UI ---
+        const switchBtn = document.getElementById('switchAuth');
+        switchBtn.onclick = () => {
             isLoginMode = !isLoginMode;
             document.getElementById('modalTitle').innerText = isLoginMode ? "Welcome Back" : "Create Account";
             document.getElementById('authBtn').innerText = isLoginMode ? "Sign In" : "Register";
             switchBtn.innerText = isLoginMode ? "Need an account? Register" : "Already have an account? Login";
-        });
+        };
 
-        authForm.onsubmit = async (e) => {
+        document.getElementById('authForm').onsubmit = async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const pass = document.getElementById('loginPass').value;
-
             try {
-                if (isLoginMode) {
-                    await signInWithEmailAndPassword(auth, email, pass);
-                } else {
-                    await createUserWithEmailAndPassword(auth, email, pass);
-                }
+                if (isLoginMode) await signInWithEmailAndPassword(auth, email, pass);
+                else await createUserWithEmailAndPassword(auth, email, pass);
                 toggleModal('loginModal');
             } catch (err) { alert(err.message); }
         };
 
         onAuthStateChanged(auth, (user) => {
-            const btnText = document.getElementById('userBtnText');
-            if (user) {
-                btnText.innerText = user.email.split('@')[0].toUpperCase();
+            currentUser = user;
+            document.getElementById('userBtnText').innerText = user ? user.email.split('@')[0].toUpperCase() : "Login";
+            if (user && user.email === "admin@omoalhaji.com") {
+                document.getElementById('adminSection').style.display = "block";
+                loadOrders();
             } else {
-                btnText.innerText = "Login";
+                document.getElementById('adminSection').style.display = "none";
             }
         });
 
-        // Make toggle accessible
+        // --- Order Logic ---
+        window.saveOrder = async (ref, items, total) => {
+            await addDoc(collection(db, "orders"), {
+                email: currentUser ? currentUser.email : "Guest",
+                items: items.map(i => i.title).join(", "),
+                total: total,
+                ref: ref,
+                status: "Paid",
+                createdAt: serverTimestamp()
+            });
+            if(currentUser?.email === "admin@omoalhaji.com") loadOrders();
+        };
+
+        async function loadOrders() {
+            const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            const container = document.getElementById('adminOrderTable');
+            container.innerHTML = "";
+            snap.forEach(d => {
+                const o = d.data();
+                const date = o.createdAt ? o.createdAt.toDate().toLocaleDateString() : '...';
+                container.innerHTML += `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${o.email}</td>
+                        <td>${o.items}</td>
+                        <td>₦${o.total.toLocaleString()}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="markDelivered('${d.id}')">Deliver</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteOrder('${d.id}')">Delete</button>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        window.markDelivered = async (id) => {
+            await updateDoc(doc(db, "orders", id), { status: "Delivered" });
+            loadOrders();
+        };
+
+        window.deleteOrder = async (id) => {
+            if(confirm("Delete this order?")) {
+                await deleteDoc(doc(db, "orders", id));
+                loadOrders();
+            }
+        };
+
         window.toggleModal = (id) => {
             const m = document.getElementById(id);
             m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
@@ -233,13 +295,11 @@
                         <div class="item-price">₦${p.price.toLocaleString()}</div>
                         <button class="btn btn-primary" onclick="addToCart(${p.id})">Add to Bag</button>
                     </div>
-                </div>
-            `).join('');
+                </div>`).join('');
         }
 
         function addToCart(id) {
-            const p = products.find(i => i.id === id);
-            cart.push(p);
+            cart.push(products.find(p => p.id === id));
             updateCart();
         }
 
@@ -251,17 +311,19 @@
         }
 
         function payWithPaystack() {
-            if(cart.length === 0) return alert("Bag is empty");
+            if(!cart.length) return alert("Empty bag");
             const total = cart.reduce((s, i) => s + i.price, 0);
             let handler = PaystackPop.setup({
-                key: 'pk_live_55a5e22282cf8c7a313b17b8f6401a15d75f8b45', 
+                key: 'pk_test_YOUR_ACTUAL_KEY_HERE', 
                 email: 'customer@omoalhaji.com',
                 amount: total * 100,
-                callback: (res) => { alert("Paid! Ref: " + res.reference); cart = []; updateCart(); toggleModal('cartModal'); }
+                callback: (res) => { 
+                    saveOrder(res.reference, cart, total);
+                    alert("Success!"); cart = []; updateCart(); toggleModal('cartModal'); 
+                }
             });
             handler.openIframe();
         }
-
         render();
     </script>
 </body>
