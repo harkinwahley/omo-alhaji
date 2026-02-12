@@ -97,7 +97,7 @@
     </section>
 
     <section id="adminSection" class="dashboard-sec" style="background: #000;">
-        <h2 class="section-title">Admin: Global Orders</h2>
+        <h2 class="section-title">Admin Dashboard (Joshua)</h2>
         <div style="overflow-x: auto;">
             <table class="data-table">
                 <thead><tr><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Actions</th></tr></thead>
@@ -127,7 +127,7 @@
             <div id="cartItems" style="margin: 20px 0; border-top: 1px solid #334155; padding-top: 10px;"></div>
             <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">Total: ₦0</div>
             <button class="btn btn-primary" onclick="payWithPaystack()">Checkout with Paystack</button>
-            <button class="btn" onclick="toggleModal('cartModal')" style="color: white; margin-top: 10px;">Continue</button>
+            <button class="btn" onclick="toggleModal('cartModal')" style="color: white; margin-top: 10px;">Continue Shopping</button>
         </div>
     </div>
 
@@ -156,7 +156,6 @@
         let currentUser = null;
         let isLoginMode = true;
 
-        // Auth Switch
         document.getElementById('switchAuth').onclick = () => {
             isLoginMode = !isLoginMode;
             document.getElementById('modalTitle').innerText = isLoginMode ? "Gallery Login" : "Create Account";
@@ -164,7 +163,6 @@
             document.getElementById('switchAuth').innerText = isLoginMode ? "New here? Create Account" : "Back to Login";
         };
 
-        // Auth Submit
         document.getElementById('authForm').onsubmit = async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
@@ -176,7 +174,6 @@
             } catch (err) { alert(err.message); }
         };
 
-        // State Listener
         onAuthStateChanged(auth, (user) => {
             currentUser = user;
             document.getElementById('userBtnText').innerText = user ? user.email.split('@')[0].toUpperCase() : "Login";
@@ -193,7 +190,6 @@
             }
         });
 
-        // Global functions for the plain script to use
         window.saveOrderToDb = async (ref, items, total) => {
             await addDoc(collection(db, "orders"), {
                 email: currentUser ? currentUser.email : "Guest",
@@ -204,7 +200,7 @@
                 createdAt: serverTimestamp()
             });
             if(currentUser) loadUserOrders(currentUser.email);
-            if(currentUser?.email === "admin@omoalhaji.com") loadAdminOrders();
+            if(currentUser?.email === "femidadajoshua@gmail.com") loadAdminOrders();
         };
 
         async function loadUserOrders(email) {
@@ -226,14 +222,14 @@
             snap.forEach(d => {
                 const o = d.data();
                 table.innerHTML += `<tr><td>${o.createdAt?.toDate().toLocaleDateString() || '...'}</td><td>${o.email}</td><td>${o.items}</td><td>₦${o.total.toLocaleString()}</td><td>
-                    <button class="btn btn-sm btn-primary" onclick="updateStatus('${d.id}', 'Delivered')">Ship</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteOrder('${d.id}')">X</button>
+                    <button class="btn btn-sm btn-primary" onclick="updateStatus('${d.id}', 'Shipped')">Ship</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteOrder('${d.id}')">Delete</button>
                 </td></tr>`;
             });
         }
 
         window.updateStatus = async (id, stat) => { await updateDoc(doc(db, "orders", id), { status: stat }); loadAdminOrders(); };
-        window.deleteOrder = async (id) => { if(confirm("Delete?")) { await deleteDoc(doc(db, "orders", id)); loadAdminOrders(); } };
+        window.deleteOrder = async (id) => { if(confirm("Permanently delete this order?")) { await deleteDoc(doc(db, "orders", id)); loadAdminOrders(); } };
         window.toggleModal = (id) => { const m = document.getElementById(id); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; };
         window.getCurrentUserEmail = () => currentUser ? currentUser.email : "guest@omoalhaji.com";
     </script>
@@ -273,15 +269,16 @@
         function payWithPaystack() {
             if(!cart.length) return alert("Bag is empty");
             const total = cart.reduce((s, i) => s + i.price, 0);
-            const userEmail = window.getCurrentUserEmail(); // Fixes merchant error
+            const userEmail = window.getCurrentUserEmail();
 
             let handler = PaystackPop.setup({
-                key: 'key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', // <-- PASTE KEY HERE
+                key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', // <-- REPLACE WITH YOUR REAL KEY
                 email: userEmail,
                 amount: total * 100,
                 callback: (res) => { 
                     saveOrderToDb(res.reference, cart, total);
-                    alert("Order Confirmed!"); cart = []; updateCart(); toggleModal('cartModal'); 
+                    alert("Payment Success! Order has been sent."); 
+                    cart = []; updateCart(); toggleModal('cartModal'); 
                 }
             });
             handler.openIframe();
