@@ -254,7 +254,7 @@
             if(cart.length === 0) return alert("Bag is empty");
             const total = cart.reduce((s, i) => s + i.price, 0);
             let handler = PaystackPop.setup({
-                key: 'pk_test_YOUR_KEY', 
+                key: 'pk_live_55a5e22282cf8c7a313b17b8f6401a15d75f8b45', 
                 email: 'customer@omoalhaji.com',
                 amount: total * 100,
                 callback: (res) => { alert("Paid! Ref: " + res.reference); cart = []; updateCart(); toggleModal('cartModal'); }
