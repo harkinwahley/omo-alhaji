@@ -314,8 +314,8 @@
             if(!cart.length) return alert("Empty bag");
             const total = cart.reduce((s, i) => s + i.price, 0);
             let handler = PaystackPop.setup({
-                key: 'pk_test_b51b0ddaff4d990f1584777db4abf4a77f920ea4', 
-                email: 'customer@omoalhaji.com',
+                key: 'key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', 
+                email: currentUser ? currentUser.email : 'guest@example.com',
                 amount: total * 100,
                 callback: (res) => { 
                     saveOrder(res.reference, cart, total);
