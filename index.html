@@ -14,7 +14,7 @@
             --primary: #fbbf24; /* Metallic Gold */
             --accent: #1e293b;  /* Slate */
             --bg-dark: #0f172a; /* Deep Navy Background */
-            --card-bg: #1e293b; /* Slightly lighter navy for cards */
+            --card-bg: #1e293b; /* Slightly lighter navy */
             --text-light: #f8fafc;
             --whatsapp: #22c55e;
         }
@@ -24,7 +24,7 @@
 
         /* --- Navigation --- */
         nav {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(15px);
             padding: 1rem 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -35,24 +35,23 @@
         .brand span { color: var(--primary); }
 
         .nav-actions { display: flex; align-items: center; gap: 20px; }
-        .cart-btn { background: none; border: none; color: white; cursor: pointer; position: relative; }
-        .cart-count { position: absolute; -top: 8px; -right: 8px; background: var(--primary); color: var(--bg-dark); padding: 2px 6px; border-radius: 50%; font-size: 0.6rem; font-weight: 800; }
+        .cart-btn { background: none; border: none; color: white; cursor: pointer; position: relative; display: flex; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--primary); color: var(--bg-dark); padding: 2px 6px; border-radius: 50%; font-size: 0.65rem; font-weight: 800; }
 
         /* --- Hero --- */
         .hero {
             height: 60vh;
-            background: linear-gradient(to bottom, rgba(15,23,42,0.2), var(--bg-dark)), 
+            background: linear-gradient(to bottom, rgba(15,23,42,0.4), var(--bg-dark)), 
                         url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1200&q=80');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
-        /* --- Grid (6 Items) --- */
-        .section-title { text-align: center; margin: 4rem 0 2rem; font-family: 'Playfair Display'; font-size: 2.5rem; }
+        /* --- Catalog Grid (6 Items) --- */
+        .section-title { text-align: center; margin: 4rem 0 2rem; font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--primary); }
         
         .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem; padding: 0 5% 5rem; max-width: 1400px; margin: auto;
         }
 
@@ -60,34 +59,32 @@
             background: var(--card-bg); border-radius: 15px; overflow: hidden;
             transition: 0.3s; border: 1px solid rgba(255,255,255,0.05);
         }
-        .item-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: var(--primary); }
+        .item-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
         .item-img { height: 250px; width: 100%; object-fit: cover; }
         .item-info { padding: 1.5rem; }
         .item-price { color: var(--primary); font-weight: 800; font-size: 1.2rem; margin: 10px 0; }
         
-        .btn { 
-            width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; 
-            transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
+        .btn { width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-primary { background: var(--primary); color: var(--bg-dark); }
-        .btn-primary:hover { opacity: 0.9; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); margin-top: 10px; }
 
         /* --- Testimonials --- */
-        .testimonials { background: var(--accent); padding: 5rem 5%; }
+        .testimonials { background: #111827; padding: 5rem 5%; }
         .t-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .t-card { background: var(--bg-dark); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--primary); }
+        .t-card { background: var(--bg-dark); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--primary); font-style: italic; }
 
-        /* --- Modal --- */
+        /* --- Modals --- */
         .modal-overlay {
             position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 3000;
+            background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000;
         }
-        .modal-card { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 450px; color: white; }
+        .modal-card { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 400px; }
+        .modal-card input { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
 
-        .wa-float { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; }
+        .wa-float { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-        @media (max-width: 768px) { .catalog-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .catalog-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 3rem; } }
     </style>
 </head>
 <body>
@@ -99,118 +96,168 @@
                 <span class="material-symbols-rounded">shopping_bag</span>
                 <span class="cart-count" id="cartCount">0</span>
             </button>
-            <button class="btn-primary" style="padding: 8px 15px; border-radius: 5px; cursor: pointer; border:none;" onclick="toggleModal('loginModal')">Login</button>
+            <button class="btn-primary" id="userBtn" style="padding: 8px 18px; border-radius: 50px;" onclick="toggleModal('loginModal')">
+                <span id="userBtnText">Login</span>
+            </button>
         </div>
     </nav>
 
     <header class="hero">
-        <h1 style="font-family: 'Playfair Display'; font-size: clamp(2.5rem, 6vw, 5rem);">Wall Affairs and General Arts</h1>
-        <p style="opacity: 0.8; letter-spacing: 2px;">PREMIUM PAINT PRODUCTION & ART GALLERY</p>
+        <h1 style="font-family: 'Playfair Display';">Masterpiece Walls</h1>
+        <p style="opacity: 0.8; letter-spacing: 3px; font-weight: 300;">PAINT PRODUCTION • SCREEDING • ART GALLERY</p>
     </header>
 
-    <h2 class="section-title">Gallery Collection</h2>
+    <h2 class="section-title">The Gallery</h2>
     <div class="catalog-grid" id="catalogGrid"></div>
 
     <section class="testimonials">
-        <h2 class="section-title" style="margin-top: 0;">What Clients Say</h2>
         <div class="t-grid">
-            <div class="t-card">
-                <p>"The texture and quality of the custom paint produced for my project was unmatched. Omo-Alhaji is a master of his craft."</p>
-                <div style="margin-top: 15px; font-weight: 800; color: var(--primary);">— Ar. Kunle Shonubi</div>
-            </div>
-            <div class="t-card">
-                <p>"Best wallpaper installation service in Ogun State. Very professional and tidy work."</p>
-                <div style="margin-top: 15px; font-weight: 800; color: var(--primary);">— Chief Mrs. Okon</div>
-            </div>
-            <div class="t-card">
-                <p>"The art framing service transformed my living room. Fast delivery and high-quality materials."</p>
-                <div style="margin-top: 15px; font-weight: 800; color: var(--primary);">— Dr. Benson</div>
-            </div>
+            <div class="t-card">"The quality of the satin paint is incredible. Omo-Alhaji is the only place I trust for my projects."<br><br><strong>- Engr. Dele</strong></div>
+            <div class="t-card">"Excellent framing and 3D wallpaper installation. Professional from start to finish."<br><br><strong>- Mrs. Funmi</strong></div>
+            <div class="t-card">"They turned my office into a masterpiece. The gold accents are stunning."<br><br><strong>- Bright Heights Ltd</strong></div>
         </div>
     </section>
 
-    <div class="modal-overlay" id="cartModal">
+    <div class="modal-overlay" id="loginModal">
         <div class="modal-card">
-            <h2>Your Gallery Bag</h2>
-            <div id="cartItems" style="margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;"></div>
-            <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">Total: ₦0</div>
-            <button class="btn btn-primary" onclick="payWithPaystack()">Checkout Now</button>
-            <button class="btn" onclick="toggleModal('cartModal')" style="color: white; margin-top: 10px;">Close</button>
+            <h2 id="modalTitle">Welcome Back</h2>
+            <form id="authForm">
+                <div style="margin-top: 15px;">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="email@example.com" required>
+                </div>
+                <div style="margin-top: 15px;">
+                    <label>Password</label>
+                    <input type="password" id="loginPass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px;" id="authBtn">Sign In</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px; font-size: 0.8rem;">
+                <a href="javascript:void(0)" id="switchAuth" style="color: var(--primary);">Need an account? Register</a>
+            </p>
+            <button class="btn-outline" style="width:100%; border:none; color:#94a3b8;" onclick="toggleModal('loginModal')">Close</button>
         </div>
     </div>
 
-    <a href="https://wa.me/2348135942500" class="wa-float"><svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.63 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-card">
+            <h2>Your Bag</h2>
+            <div id="cartItems" style="margin: 20px 0; max-height: 200px; overflow-y: auto;"></div>
+            <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; border-top: 1px solid #334155; padding-top: 10px;">Total: ₦0</div>
+            <button class="btn btn-primary" style="margin-top: 20px;" onclick="payWithPaystack()">Proceed to Payment</button>
+            <button class="btn" onclick="toggleModal('cartModal')" style="color: white;">Continue Shopping</button>
+        </div>
+    </div>
+
+    <a href="https://wa.me/2348135942500" class="wa-float" target="_blank">
+        <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.63 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWv4pF_5hVBqYLl4MZIvndWq5slckZ-1E",
+            authDomain: "omo-alhaji.firebaseapp.com",
+            projectId: "omo-alhaji",
+            storageBucket: "omo-alhaji.firebasestorage.app",
+            messagingSenderId: "373858886528",
+            appId: "1:373858886528:web:fac1898e827bc08d26d765"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- Auth Logic ---
+        let isLoginMode = true;
+        const switchBtn = document.getElementById('switchAuth');
+        const authForm = document.getElementById('authForm');
+
+        switchBtn.addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            document.getElementById('modalTitle').innerText = isLoginMode ? "Welcome Back" : "Create Account";
+            document.getElementById('authBtn').innerText = isLoginMode ? "Sign In" : "Register";
+            switchBtn.innerText = isLoginMode ? "Need an account? Register" : "Already have an account? Login";
+        });
+
+        authForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+
+            try {
+                if (isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, pass);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, pass);
+                }
+                toggleModal('loginModal');
+            } catch (err) { alert(err.message); }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            const btnText = document.getElementById('userBtnText');
+            if (user) {
+                btnText.innerText = user.email.split('@')[0].toUpperCase();
+            } else {
+                btnText.innerText = "Login";
+            }
+        });
+
+        // Make toggle accessible
+        window.toggleModal = (id) => {
+            const m = document.getElementById(id);
+            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+        };
+    </script>
 
     <script>
-        const catalogItems = [
-            { id: 1, title: "Custom Satin Paint", price: 45000, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600", desc: "Durable, washable premium satin finish." },
-            { id: 2, title: "3D Textured Wallpaper", price: 18000, img: "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600", desc: "Imported luxury patterns for feature walls." },
-            { id: 3, title: "Gold-Trim Art Frame", price: 35000, img: "https://images.unsplash.com/photo-1583941516510-09689874892c?w=600", desc: "Museum-grade framing for digital art." },
-            { id: 4, title: "Wall Screeding Service", price: 2500, img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600", desc: "Per sqm professional wall leveling." },
-            { id: 5, title: "Abstract Canvas Art", price: 120000, img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=600", desc: "Hand-painted original gallery piece." },
-            { id: 6, title: "Interior Branding", price: 55000, img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600", desc: "Logo wall installations for offices." }
+        const products = [
+            { id: 1, title: "Satin Finish Paint", price: 45000, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600" },
+            { id: 2, title: "3D Damask Wallpaper", price: 15500, img: "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600" },
+            { id: 3, title: "Metallic Art Frame", price: 28000, img: "https://images.unsplash.com/photo-1583941516510-09689874892c?w=600" },
+            { id: 4, title: "Wall Screeding", price: 3500, img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600" },
+            { id: 5, title: "Abstract Canvas", price: 85000, img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=600" },
+            { id: 6, title: "Office Branding", price: 60000, img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600" }
         ];
 
         let cart = [];
 
         function render() {
-            document.getElementById('catalogGrid').innerHTML = catalogItems.map(item => `
+            document.getElementById('catalogGrid').innerHTML = products.map(p => `
                 <div class="item-card">
-                    <img src="${item.img}" class="item-img" alt="${item.title}">
+                    <img src="${p.img}" class="item-img">
                     <div class="item-info">
-                        <h3>${item.title}</h3>
-                        <p style="font-size: 0.8rem; opacity: 0.7; margin-top:5px;">${item.desc}</p>
-                        <div class="item-price">₦${item.price.toLocaleString()}</div>
-                        <button class="btn btn-primary" onclick="addToCart(${item.id})">
-                            <span class="material-symbols-rounded">add_shopping_cart</span> Add to Bag
-                        </button>
+                        <h3>${p.title}</h3>
+                        <div class="item-price">₦${p.price.toLocaleString()}</div>
+                        <button class="btn btn-primary" onclick="addToCart(${p.id})">Add to Bag</button>
                     </div>
                 </div>
             `).join('');
         }
 
         function addToCart(id) {
-            const item = catalogItems.find(p => p.id === id);
-            cart.push(item);
-            updateCartUI();
-            alert(item.title + " added to bag!");
+            const p = products.find(i => i.id === id);
+            cart.push(p);
+            updateCart();
         }
 
-        function updateCartUI() {
+        function updateCart() {
             document.getElementById('cartCount').innerText = cart.length;
-            const container = document.getElementById('cartItems');
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            
-            container.innerHTML = cart.map(item => `
-                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                    <span>${item.title}</span>
-                    <span>₦${item.price.toLocaleString()}</span>
-                </div>
-            `).join('');
-            
+            const total = cart.reduce((s, i) => s + i.price, 0);
             document.getElementById('cartTotal').innerText = "Total: ₦" + total.toLocaleString();
-        }
-
-        function toggleModal(id) {
-            const m = document.getElementById(id);
-            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+            document.getElementById('cartItems').innerHTML = cart.map(i => `<div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>${i.title}</span><span>₦${i.price.toLocaleString()}</span></div>`).join('');
         }
 
         function payWithPaystack() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            if(total <= 0) return alert("Your bag is empty!");
-            
+            if(cart.length === 0) return alert("Bag is empty");
+            const total = cart.reduce((s, i) => s + i.price, 0);
             let handler = PaystackPop.setup({
-                key: 'pk_test_YOUR_KEY_HERE', 
-                email: 'customer@omoalhai.com',
+                key: 'pk_test_YOUR_KEY', 
+                email: 'customer@omoalhaji.com',
                 amount: total * 100,
-                onClose: () => alert('Transaction Cancelled'),
-                callback: (res) => {
-                    alert('Order Placed! Reference: ' + res.reference);
-                    cart = [];
-                    updateCartUI();
-                    toggleModal('cartModal');
-                }
+                callback: (res) => { alert("Paid! Ref: " + res.reference); cart = []; updateCart(); toggleModal('cartModal'); }
             });
             handler.openIframe();
         }
