@@ -1,342 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omo-Alhaji | Wall Affairs & Art Gallery</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omo-Alhaji | Wall Affairs & Art Gallery</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-    <style>
-        :root {
-            --primary: #f59e0b; /* Golden Paint */
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --border: #e2e8f0;
-            --whatsapp: #25d366;
-        }
+    <style>
+        :root {
+            --primary: #f59e0b; /* Golden Paint */
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --whatsapp: #25d366;
+        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--light); color: var(--dark); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--light); color: var(--dark); }
 
-        /* Navigation */
-        nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid var(--border);
-        }
-        .brand-group { display: flex; flex-direction: column; }
-        .brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--dark); text-decoration: none; }
-        .brand span { color: var(--primary); }
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        .brand-group { display: flex; flex-direction: column; }
+        .brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--dark); text-decoration: none; }
+        .brand span { color: var(--primary); }
 
-        .nav-actions { display: flex; align-items: center; gap: 15px; }
-        
-        .auth-trigger {
-            display: flex; align-items: center; gap: 8px;
-            padding: 8px 16px; border-radius: 50px;
-            background: var(--dark); color: white;
-            text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            cursor: pointer; border: none;
-        }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        
+        .auth-trigger {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px; border-radius: 50px;
+            background: var(--dark); color: white;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            cursor: pointer; border: none;
+        }
 
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.7); display: none;
-            justify-content: center; align-items: center; z-index: 3000;
-        }
-        .modal-card {
-            background: white; padding: 2.5rem; border-radius: 20px;
-            width: 90%; max-width: 400px; position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-        }
-        .modal-card h2 { font-family: 'Playfair Display'; margin-bottom: 1.5rem; }
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; color: var(--dark); }
-        .form-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; }
-        
-        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; color: #888; }
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.7); display: none;
+            justify-content: center; align-items: center; z-index: 3000;
+        }
+        .modal-card {
+            background: white; padding: 2.5rem; border-radius: 20px;
+            width: 90%; max-width: 400px; position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        .modal-card h2 { font-family: 'Playfair Display'; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; color: var(--dark); }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; }
+        
+        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; color: #888; }
 
-        .hero {
-            height: 70vh;
-            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
-                        url('https://images.unsplash.com/photo-1562624382-82b89b002813?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; color: white; padding: 0 5%;
-        }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; opacity: 0.9; }
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
+                        url('https://images.unsplash.com/photo-1562624382-82b89b002813?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 0 5%;
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; opacity: 0.9; }
 
-        .catalog-controls {
-            max-width: 1000px; margin: -50px auto 3rem;
-            background: var(--white); padding: 1.5rem; border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
-            position: relative; z-index: 10;
-        }
-        .control-group label { display: block; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 5px; }
-        .control-group select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: #fdfdfd; font-family: inherit; }
+        .catalog-controls {
+            max-width: 1000px; margin: -50px auto 3rem;
+            background: var(--white); padding: 1.5rem; border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
+            position: relative; z-index: 10;
+        }
+        .control-group label { display: block; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 5px; }
+        .control-group select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: #fdfdfd; font-family: inherit; }
 
-        .catalog-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem; padding: 0 5% 5rem; max-width: 1400px; margin: auto;
-        }
+        .catalog-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem; padding: 0 5% 5rem; max-width: 1400px; margin: auto;
+        }
 
-        .item-card {
-            background: var(--white); border-radius: 20px; overflow: hidden;
-            border: 1px solid var(--border); transition: 0.3s;
-        }
-        .item-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-        
-        .item-img { height: 280px; position: relative; }
-        .item-img img { width: 100%; height: 100%; object-fit: cover; }
-        .badge { position: absolute; top: 15px; left: 15px; background: var(--dark); color: white; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
-        .price-tag { position: absolute; bottom: 15px; right: 15px; background: var(--primary); color: var(--dark); padding: 6px 15px; border-radius: 10px; font-weight: 800; }
+        .item-card {
+            background: var(--white); border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--border); transition: 0.3s;
+        }
+        .item-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        
+        .item-img { height: 280px; position: relative; }
+        .item-img img { width: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 15px; left: 15px; background: var(--dark); color: white; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
+        .price-tag { position: absolute; bottom: 15px; right: 15px; background: var(--primary); color: var(--dark); padding: 6px 15px; border-radius: 10px; font-weight: 800; }
 
-        .item-info { padding: 1.5rem; }
-        .item-info h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--dark); }
-        .item-info p { color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem; height: 3rem; overflow: hidden; }
+        .item-info { padding: 1.5rem; }
+        .item-info h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--dark); }
+        .item-info p { color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem; height: 3rem; overflow: hidden; }
 
-        .btn-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .btn { 
-            padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; 
-            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s;
-            border: none; cursor: pointer;
-        }
-        .btn-wa { background: var(--whatsapp); color: white; }
-        .btn-primary { background: var(--primary); color: var(--dark); }
+        .btn-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .btn { 
+            padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s;
+            border: none; cursor: pointer;
+        }
+        .btn-wa { background: var(--whatsapp); color: white; }
+        .btn-primary { background: var(--primary); color: var(--dark); }
 
-        .wa-float {
-            position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp);
-            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 2000; transition: 0.3s;
-        }
+        .wa-float {
+            position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp);
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 2000; transition: 0.3s;
+        }
 
-        .contact-section { background: var(--dark); color: white; padding: 5rem 5%; text-align: center; }
-        .contact-form { max-width: 600px; margin: 2rem auto; display: grid; gap: 1rem; }
-        .contact-form input, .contact-form textarea { padding: 15px; border-radius: 10px; border: none; width: 100%; }
-        
-        @media (max-width: 768px) {
-            .catalog-controls { margin: -30px 5% 2rem; grid-template-columns: 1fr; }
-            .hero h1 { font-size: 3.5rem; }
-            .nav-actions span { display: none; }
-        }
-    </style>
+        .contact-section { background: var(--dark); color: white; padding: 5rem 5%; text-align: center; }
+        .contact-form { max-width: 600px; margin: 2rem auto; display: grid; gap: 1rem; }
+        .contact-form input, .contact-form textarea { padding: 15px; border-radius: 10px; border: none; width: 100%; }
+        
+        @media (max-width: 768px) {
+            .catalog-controls { margin: -30px 5% 2rem; grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.5rem; }
+            .nav-actions span { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <nav>
-        <div class="brand-group">
-            <a href="#" class="brand">OMO-<span>ALHAJI</span></a>
-            <div style="font-weight: 700; font-size: 0.6rem; color: #888; letter-spacing: 1px;">WALL AFFAIRS & GENERAL ART</div>
-        </div>
-        
-        <div class="nav-actions">
-            <button class="auth-trigger" onclick="toggleModal('loginModal')" id="userBtn">
-                <span class="material-symbols-rounded">person</span>
-                <span id="userBtnText">Client Login</span>
-            </button>
-        </div>
-    </nav>
+    <nav>
+        <div class="brand-group">
+            <a href="#" class="brand">OMO-<span>ALHAJI</span></a>
+            <div style="font-weight: 700; font-size: 0.6rem; color: #888; letter-spacing: 1px;">WALL AFFAIRS & GENERAL ART</div>
+        </div>
+        
+        <div class="nav-actions">
+            <button class="auth-trigger" onclick="toggleModal('loginModal')" id="userBtn">
+                <span class="material-symbols-rounded">person</span>
+                <span id="userBtnText">Client Login</span>
+            </button>
+        </div>
+    </nav>
 
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal-card">
-            <span class="material-symbols-rounded close-modal" onclick="toggleModal('loginModal')">close</span>
-            <h2>Welcome Back</h2>
-            <form onsubmit="handleAuth(event)">
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" id="loginEmail" placeholder="name@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
-            </form>
-            <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem; color: #666;">
-                Don't have an account? <a href="#" style="color: var(--primary); font-weight: 700;">Register</a>
-            </p>
-        </div>
-    </div>
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card">
+            <span class="material-symbols-rounded close-modal" onclick="toggleModal('loginModal')">close</span>
+            <h2>Welcome Back</h2>
+            <form onsubmit="handleAuth(event)">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem; color: #666;">
+                Don't have an account? <a href="#" style="color: var(--primary); font-weight: 700;">Register</a>
+            </p>
+        </div>
+    </div>
 
-    <header class="hero">
-        <h1>OMO-ALHAJI</h1>
-        <p>Premium Wall Finishing, Paint Production, and Custom Artworks.</p>
-        <a href="#catalog" class="btn btn-primary" style="width: auto; padding: 15px 40px;">Explore Gallery</a>
-    </header>
+    <header class="hero">
+        <h1>OMO-ALHAJI</h1>
+        <p>Premium Wall Finishing, Paint Production, and Custom Artworks.</p>
+        <a href="#catalog" class="btn btn-primary" style="width: auto; padding: 15px 40px;">Explore Gallery</a>
+    </header>
 
-    <section id="catalog">
-        <div class="catalog-controls">
-            <div class="control-group">
-                <label>I am looking for</label>
-                <select id="catFilter" onchange="filterItems()">
-                    <option value="all">Everything</option>
-                    <option value="service">Services (Painting/Screeding)</option>
-                    <option value="product">Products (Wallpaper/Art)</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label>Category</label>
-                <select id="typeFilter" onchange="filterItems()">
-                    <option value="all">All Specialties</option>
-                    <option value="Wall">Wall Finishing</option>
-                    <option value="Design">Design & Branding</option>
-                    <option value="Retail">Sales & Supplies</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label>Location</label>
-                <select>
-                    <option>Ogun State / Nationwide</option>
-                </select>
-            </div>
-        </div>
+    <section id="catalog">
+        <div class="catalog-controls">
+            <div class="control-group">
+                <label>I am looking for</label>
+                <select id="catFilter" onchange="filterItems()">
+                    <option value="all">Everything</option>
+                    <option value="service">Services (Painting/Screeding)</option>
+                    <option value="product">Products (Wallpaper/Art)</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Category</label>
+                <select id="typeFilter" onchange="filterItems()">
+                    <option value="all">All Specialties</option>
+                    <option value="Wall">Wall Finishing</option>
+                    <option value="Design">Design & Branding</option>
+                    <option value="Retail">Sales & Supplies</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Location</label>
+                <select>
+                    <option>Ogun State / Nationwide</option>
+                </select>
+            </div>
+        </div>
 
-        <div class="catalog-grid" id="catalogGrid"></div>
-    </section>
+        <div class="catalog-grid" id="catalogGrid"></div>
+    </section>
 
-    <section class="contact-section" id="contact">
-        <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem;">Start Your Project</h2>
-        <p>Send a message for quotes and bookings.</p>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email Address" required>
-            <textarea placeholder="Tell us about your wall project..." rows="5" required></textarea>
-            <button type="submit" class="btn btn-primary">Submit Request</button>
-        </form>
-    </section>
+    <section class="contact-section" id="contact">
+        <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem;">Start Your Project</h2>
+        <p>Send a message for quotes and bookings.</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email Address" required>
+            <textarea placeholder="Tell us about your wall project..." rows="5" required></textarea>
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+        </form>
+    </section>
 
-    <footer style="text-align: center; padding: 2rem; background: #000; color: #555; font-size: 0.8rem;">
-        &copy; 2026 Omo-Alhaji Wall Affairs & General Art.
-    </footer>
+    <footer style="text-align: center; padding: 2rem; background: #000; color: #555; font-size: 0.8rem;">
+        &copy; 2026 Omo-Alhaji Wall Affairs & General Art.
+    </footer>
 
-    <a href="https://wa.me/2348135942500" class="wa-float" target="_blank">
-        <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.63 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </a>
+    <a href="https://wa.me/2348135942500" class="wa-float" target="_blank">
+        <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.63 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
 
-    <script>
-        const catalogItems = [
-            { 
-                id: 1, 
-                title: "Production & Sales of Paint", 
-                cat: "service", 
-                type: "Wall", 
-                price: "From ₦2,500/sqm", 
-                img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80", 
-                desc: "Premium smooth finishing and custom paint production for high-end interiors." 
-            },
-            { 
-                id: 2, 
-                title: "Branding & Package", 
-                cat: "service", 
-                type: "Design", 
-                price: "Custom Quote", 
-                img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80", 
-                desc: "Logo design, office signage, and professional brand identity for your business." 
-            },
-            { 
-                id: 3, 
-                title: "Artwork Installation", 
-                cat: "service", 
-                type: "Wall", 
-                price: "From ₦8,000/sqm", 
-                img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80", 
-                desc: "Modern architectural POP designs, wall screeding, and integrated lighting." 
-            },
-            { 
-                id: 4, 
-                title: "Premium Wallpaper", 
-                cat: "product", 
-                type: "Retail", 
-                price: "₦15,500/roll", 
-                img: "https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&w=600&q=80", 
-                desc: "Exotic textured wallpaper, moisture-resistant and durable for all wall types." 
-            },
-            { 
-                id: 5, 
-                title: "Art Framing", 
-                cat: "product", 
-                type: "Retail", 
-                price: "₦25,000", 
-                img: "https://images.unsplash.com/photo-1583941516510-09689874892c?auto=format&fit=crop&w=600&q=80", 
-                desc: "Hand-crafted premium frames for photographs and digital art pieces." 
-            },
-            { 
-                id: 6, 
-                title: "Interior Designing", 
-                cat: "product", 
-                type: "Retail", 
-                price: "From ₦10,000", 
-                img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80", 
-                desc: "Professional interior consultation and custom digital room mockups." 
-            }
-        ];
+    <script>
+        const catalogItems = [
+            { 
+                id: 1, 
+                title: "Sales of Paint & Production", 
+                cat: "service", 
+                type: "Wall", 
+                price: "From ₦2,500/sqm", 
+                img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80", 
+                desc: "Premium smooth finishing and custom paint production for high-end interiors." 
+            },
+            { 
+                id: 2, 
+                title: "Branding Package", 
+                cat: "service", 
+                type: "Design", 
+                price: "Custom Quote", 
+                img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80", 
+                desc: "Logo design, office signage, and professional brand identity for your business." 
+            },
+            { 
+                id: 3, 
+                title: "Wall Installation", 
+                cat: "service", 
+                type: "Wall", 
+                price: "From ₦8,000/sqm", 
+                img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80", 
+                desc: "Modern architectural POP designs, wall screeding, and integrated lighting." 
+            },
+            { 
+                id: 4, 
+                title: "Premium Wallpaper", 
+                cat: "product", 
+                type: "Retail", 
+                price: "₦15,500/roll", 
+                img: "https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&w=600&q=80", 
+                desc: "Exotic textured wallpaper, moisture-resistant and durable for all wall types." 
+            },
+            { 
+                id: 5, 
+                title: "Art Framing", 
+                cat: "product", 
+                type: "Retail", 
+                price: "₦25,000", 
+                img: "https://images.unsplash.com/photo-1583941516510-09689874892c?auto=format&fit=crop&w=600&q=80", 
+                desc: "Hand-crafted premium frames for photographs and digital art pieces." 
+            },
+            { 
+                id: 6, 
+                title: "Interior Designing", 
+                cat: "product", 
+                type: "Retail", 
+                price: "From ₦10,000", 
+                img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80", 
+                desc: "Professional interior consultation and custom digital room mockups." 
+            }
+        ];
 
-        // --- AUTHENTICATION LOGIC ---
-        let isLoggedIn = false;
+        // --- AUTHENTICATION LOGIC ---
+        let isLoggedIn = false;
 
-        function toggleModal(id) {
-            const modal = document.getElementById(id);
-            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
-        }
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
 
-        function handleAuth(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const userPart = email.split('@')[0];
-            
-            isLoggedIn = true;
-            document.getElementById('userBtnText').innerText = "Hi, " + userPart;
-            document.getElementById('userBtn').style.background = "var(--primary)";
-            document.getElementById('userBtn').style.color = "var(--dark)";
-            
-            toggleModal('loginModal');
-            alert("Welcome to Omo-Alhaji, " + userPart + "!");
-        }
+        function handleAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const userPart = email.split('@')[0];
+            
+            isLoggedIn = true;
+            document.getElementById('userBtnText').innerText = "Hi, " + userPart;
+            document.getElementById('userBtn').style.background = "var(--primary)";
+            document.getElementById('userBtn').style.color = "var(--dark)";
+            
+            toggleModal('loginModal');
+            alert("Welcome to Omo-Alhaji, " + userPart + "!");
+        }
 
-        // --- CATALOG LOGIC ---
-        function render(data) {
-            const grid = document.getElementById('catalogGrid');
-            grid.innerHTML = data.map(item => `
-                <div class="item-card">
-                    <div class="item-img">
-                        <img src="${item.img}" alt="${item.title}">
-                        <div class="badge">${item.cat === 'service' ? 'SERVICE' : 'FOR SALE'}</div>
-                        <div class="price-tag">${item.price}</div>
-                    </div>
-                    <div class="item-info">
-                        <h3>${item.title}</h3>
-                        <p>${item.desc}</p>
-                        <div class="btn-row">
-                            <a href="https://wa.me/2348135942500?text=I'm%20interested%20in%20${encodeURIComponent(item.title)}" target="_blank" class="btn btn-wa">
-                                <span class="material-symbols-rounded">chat</span> ${item.cat === 'service' ? 'Book Service' : 'Buy Now'}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
+        // --- CATALOG LOGIC ---
+        function render(data) {
+            const grid = document.getElementById('catalogGrid');
+            grid.innerHTML = data.map(item => `
+                <div class="item-card">
+                    <div class="item-img">
+                        <img src="${item.img}" alt="${item.title}">
+                        <div class="badge">${item.cat === 'service' ? 'SERVICE' : 'FOR SALE'}</div>
+                        <div class="price-tag">${item.price}</div>
+                    </div>
+                    <div class="item-info">
+                        <h3>${item.title}</h3>
+                        <p>${item.desc}</p>
+                        <div class="btn-row">
+                            <a href="https://wa.me/2348135942500?text=I'm%20interested%20in%20${encodeURIComponent(item.title)}" target="_blank" class="btn btn-wa">
+                                <span class="material-symbols-rounded">chat</span> ${item.cat === 'service' ? 'Book Service' : 'Buy Now'}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-        function filterItems() {
-            const cat = document.getElementById('catFilter').value;
-            const type = document.getElementById('typeFilter').value;
-            const filtered = catalogItems.filter(i => {
-                const catMatch = cat === 'all' || i.cat === cat;
-                const typeMatch = type === 'all' || i.type === type;
-                return catMatch && typeMatch;
-            });
-            render(filtered);
-        }
+        function filterItems() {
+            const cat = document.getElementById('catFilter').value;
+            const type = document.getElementById('typeFilter').value;
+            const filtered = catalogItems.filter(i => {
+                const catMatch = cat === 'all' || i.cat === cat;
+                const typeMatch = type === 'all' || i.type === type;
+                return catMatch && typeMatch;
+            });
+            render(filtered);
+        }
 
-        render(catalogItems);
-    </script>
+        render(catalogItems);
+    </script>
 </body>
 </html>
