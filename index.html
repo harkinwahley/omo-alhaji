@@ -31,7 +31,7 @@
         .cart-count { position: absolute; top: -8px; right: -8px; background: var(--primary); color: var(--bg-dark); padding: 2px 6px; border-radius: 50%; font-size: 0.65rem; font-weight: 800; }
 
         .hero {
-            height: 50vh;
+            height: 45vh;
             background: linear-gradient(to bottom, rgba(15,23,42,0.4), var(--bg-dark)), 
                         url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1200&q=80');
             background-size: cover; background-position: center;
@@ -46,8 +46,8 @@
         .item-info { padding: 1.2rem; }
         .item-price { color: var(--primary); font-weight: 800; font-size: 1.1rem; margin: 8px 0; }
 
-        .dashboard-sec { display: none; padding: 4rem 5%; background: #111827; border-top: 1px solid var(--primary); }
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--bg-dark); border-radius: 10px; overflow: hidden; font-size: 0.9rem; }
+        .admin-sec { display: none; padding: 4rem 5%; background: #000; border-top: 1px solid var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--bg-dark); border-radius: 10px; overflow: hidden; font-size: 0.85rem; }
         .data-table th, .data-table td { padding: 12px; text-align: left; border-bottom: 1px solid #334155; }
         .data-table th { background: var(--accent); color: var(--primary); }
 
@@ -55,11 +55,17 @@
         .btn-primary { background: var(--primary); color: var(--bg-dark); }
         .btn-sm { padding: 6px 12px; font-size: 0.7rem; width: auto; margin-right: 5px; }
         .btn-danger { background: var(--danger); color: white; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); font-size: 0.8rem; padding: 8px; }
 
         .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000; }
-        .modal-card { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 400px; }
+        .modal-card { background: var(--card-bg); padding: 2rem; border-radius: 20px; width: 95%; max-width: 450px; position: relative; }
         .modal-card input { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
         
+        /* Modal Tabs */
+        .modal-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+        .tab-btn { background: none; border: none; color: #94a3b8; cursor: pointer; font-weight: 600; padding: 5px 10px; }
+        .tab-btn.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+
         .wa-float { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; }
     </style>
 </head>
@@ -68,7 +74,7 @@
     <nav>
         <a href="#" class="brand">OMO-<span>ALHAJI</span></a>
         <div class="nav-actions">
-            <button class="cart-btn" onclick="toggleModal('cartModal')">
+            <button class="cart-btn" onclick="openCart()">
                 <span class="material-symbols-rounded">shopping_bag</span>
                 <span class="cart-count" id="cartCount">0</span>
             </button>
@@ -79,8 +85,8 @@
     </nav>
 
     <header class="hero">
-        <h1 style="font-family: 'Playfair Display'; font-size: 3rem;">Omo-Alhaji Art Gallery</h1>
-        <p style="opacity: 0.8; letter-spacing: 2px;">PREMIUM WALL AFFAIRS & PAINT PRODUCTION</p>
+        <h1 style="font-family: 'Playfair Display'; font-size: clamp(2rem, 5vw, 3.5rem);">Omo-Alhaji Art Gallery</h1>
+        <p style="opacity: 0.8; letter-spacing: 2px; font-size: 0.8rem;">PREMIUM WALL AFFAIRS • PAINT PRODUCTION</p>
     </header>
 
     <section id="catalog">
@@ -88,16 +94,8 @@
         <div class="catalog-grid" id="catalogGrid"></div>
     </section>
 
-    <section id="userHistorySection" class="dashboard-sec">
-        <h2 class="section-title">Your Order History</h2>
-        <table class="data-table">
-            <thead><tr><th>Date</th><th>Items</th><th>Total</th><th>Status</th></tr></thead>
-            <tbody id="userOrderTable"></tbody>
-        </table>
-    </section>
-
-    <section id="adminSection" class="dashboard-sec" style="background: #000;">
-        <h2 class="section-title">Admin Dashboard (Joshua)</h2>
+    <section id="adminSection" class="admin-sec">
+        <h2 class="section-title">Global Order Manager</h2>
         <div style="overflow-x: auto;">
             <table class="data-table">
                 <thead><tr><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Actions</th></tr></thead>
@@ -123,11 +121,24 @@
 
     <div class="modal-overlay" id="cartModal">
         <div class="modal-card">
-            <h2>Your Bag</h2>
-            <div id="cartItems" style="margin: 20px 0; border-top: 1px solid #334155; padding-top: 10px;"></div>
-            <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">Total: ₦0</div>
-            <button class="btn btn-primary" onclick="payWithPaystack()">Checkout with Paystack</button>
-            <button class="btn" onclick="toggleModal('cartModal')" style="color: white; margin-top: 10px;">Continue Shopping</button>
+            <div class="modal-tabs">
+                <button class="tab-btn active" id="tabCart" onclick="switchTab('cart')">Current Bag</button>
+                <button class="tab-btn" id="tabHistory" onclick="switchTab('history')">Order History</button>
+            </div>
+
+            <div id="viewCart">
+                <div id="cartItems" style="margin: 10px 0; min-height: 100px;"></div>
+                <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; margin: 15px 0;">Total: ₦0</div>
+                <button class="btn btn-primary" onclick="payWithPaystack()">Checkout with Paystack</button>
+            </div>
+
+            <div id="viewHistory" style="display: none;">
+                <div id="userOrderList" style="max-height: 300px; overflow-y: auto; font-size: 0.85rem;">
+                    <p style="opacity:0.5; text-align:center; padding: 20px;">Log in to see your orders.</p>
+                </div>
+            </div>
+
+            <button class="btn" onclick="toggleModal('cartModal')" style="color: white; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1);">Close</button>
         </div>
     </div>
 
@@ -178,15 +189,14 @@
             currentUser = user;
             document.getElementById('userBtnText').innerText = user ? user.email.split('@')[0].toUpperCase() : "Login";
             if (user) {
-                document.getElementById('userHistorySection').style.display = "block";
                 loadUserOrders(user.email);
                 if (user.email === "femidadajoshua@gmail.com") {
                     document.getElementById('adminSection').style.display = "block";
                     loadAdminOrders();
                 }
             } else {
-                document.getElementById('userHistorySection').style.display = "none";
                 document.getElementById('adminSection').style.display = "none";
+                document.getElementById('userOrderList').innerHTML = `<p style="opacity:0.5; text-align:center; padding: 20px;">Log in to see your orders.</p>`;
             }
         });
 
@@ -196,7 +206,7 @@
                 items: items.map(i => i.title).join(", "),
                 total: total,
                 ref: ref,
-                status: "Processing",
+                status: "Paid/Processing",
                 createdAt: serverTimestamp()
             });
             if(currentUser) loadUserOrders(currentUser.email);
@@ -206,11 +216,19 @@
         async function loadUserOrders(email) {
             const q = query(collection(db, "orders"), where("email", "==", email), orderBy("createdAt", "desc"));
             const snap = await getDocs(q);
-            const table = document.getElementById('userOrderTable');
-            table.innerHTML = snap.empty ? "<tr><td colspan='4'>No orders yet.</td></tr>" : "";
+            const list = document.getElementById('userOrderList');
+            list.innerHTML = snap.empty ? "<p style='padding:20px; text-align:center;'>No orders found.</p>" : "";
             snap.forEach(d => {
                 const o = d.data();
-                table.innerHTML += `<tr><td>${o.createdAt?.toDate().toLocaleDateString() || '...'}</td><td>${o.items}</td><td>₦${o.total.toLocaleString()}</td><td>${o.status}</td></tr>`;
+                list.innerHTML += `
+                <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px 0;">
+                    <div style="display:flex; justify-content:space-between; font-weight:800; color:var(--primary);">
+                        <span>${o.createdAt?.toDate().toLocaleDateString() || 'Pending'}</span>
+                        <span>₦${o.total.toLocaleString()}</span>
+                    </div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;">${o.items}</div>
+                    <div style="font-size: 0.7rem; color: #22c55e;">Status: ${o.status}</div>
+                </div>`;
             });
         }
 
@@ -223,15 +241,35 @@
                 const o = d.data();
                 table.innerHTML += `<tr><td>${o.createdAt?.toDate().toLocaleDateString() || '...'}</td><td>${o.email}</td><td>${o.items}</td><td>₦${o.total.toLocaleString()}</td><td>
                     <button class="btn btn-sm btn-primary" onclick="updateStatus('${d.id}', 'Shipped')">Ship</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteOrder('${d.id}')">Delete</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteOrder('${d.id}')">X</button>
                 </td></tr>`;
             });
         }
 
         window.updateStatus = async (id, stat) => { await updateDoc(doc(db, "orders", id), { status: stat }); loadAdminOrders(); };
-        window.deleteOrder = async (id) => { if(confirm("Permanently delete this order?")) { await deleteDoc(doc(db, "orders", id)); loadAdminOrders(); } };
+        window.deleteOrder = async (id) => { if(confirm("Delete order?")) { await deleteDoc(doc(db, "orders", id)); loadAdminOrders(); } };
         window.toggleModal = (id) => { const m = document.getElementById(id); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; };
         window.getCurrentUserEmail = () => currentUser ? currentUser.email : "guest@omoalhaji.com";
+        
+        window.switchTab = (target) => {
+            const viewCart = document.getElementById('viewCart');
+            const viewHistory = document.getElementById('viewHistory');
+            const tabCart = document.getElementById('tabCart');
+            const tabHistory = document.getElementById('tabHistory');
+
+            if (target === 'cart') {
+                viewCart.style.display = 'block'; viewHistory.style.display = 'none';
+                tabCart.classList.add('active'); tabHistory.classList.remove('active');
+            } else {
+                viewCart.style.display = 'none'; viewHistory.style.display = 'block';
+                tabHistory.classList.add('active'); tabCart.classList.remove('active');
+            }
+        };
+
+        window.openCart = () => {
+            switchTab('cart');
+            toggleModal('cartModal');
+        };
     </script>
 
     <script>
@@ -258,12 +296,12 @@
                 </div>`).join('');
         }
 
-        function addToCart(id) { cart.push(products.find(p => p.id === id)); updateCart(); }
+        function addToCart(id) { cart.push(products.find(p => p.id === id)); updateCart(); openCart(); }
         function updateCart() {
             document.getElementById('cartCount').innerText = cart.length;
             const total = cart.reduce((s, i) => s + i.price, 0);
             document.getElementById('cartTotal').innerText = "Total: ₦" + total.toLocaleString();
-            document.getElementById('cartItems').innerHTML = cart.map(i => `<div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>${i.title}</span><span>₦${i.price.toLocaleString()}</span></div>`).join('');
+            document.getElementById('cartItems').innerHTML = cart.length ? cart.map(i => `<div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:8px;"><span>${i.title}</span><span>₦${i.price.toLocaleString()}</span></div>`).join('') : "<p style='opacity:0.5; text-align:center;'>Your bag is empty</p>";
         }
 
         function payWithPaystack() {
@@ -272,18 +310,19 @@
             const userEmail = window.getCurrentUserEmail();
 
             let handler = PaystackPop.setup({
-                key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', // <-- REPLACE WITH YOUR REAL KEY
+                key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', 
                 email: userEmail,
                 amount: total * 100,
                 callback: (res) => { 
                     saveOrderToDb(res.reference, cart, total);
-                    alert("Payment Success! Order has been sent."); 
-                    cart = []; updateCart(); toggleModal('cartModal'); 
+                    alert("Payment Success!"); 
+                    cart = []; updateCart(); switchTab('history');
                 }
             });
             handler.openIframe();
         }
         render();
+        updateCart();
     </script>
 </body>
 </html>
