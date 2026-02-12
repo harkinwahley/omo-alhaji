@@ -39,6 +39,13 @@
         }
 
         .section-title { text-align: center; margin: 3rem 0 1.5rem; font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--primary); }
+        
+        /* Testimonials Styles */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 0 5% 2rem; max-width: 1400px; margin: auto; }
+        .testi-card { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--primary); }
+        .stars { color: var(--primary); margin-bottom: 10px; font-size: 0.9rem; }
+        .client-name { display: block; margin-top: 15px; font-weight: 800; font-size: 0.85rem; color: var(--primary); }
+
         .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding: 0 5% 4rem; max-width: 1400px; margin: auto; }
         .item-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; transition: 0.3s; border: 1px solid rgba(255,255,255,0.05); }
         .item-card:hover { transform: translateY(-10px); border-color: var(--primary); }
@@ -55,13 +62,11 @@
         .btn-primary { background: var(--primary); color: var(--bg-dark); }
         .btn-sm { padding: 6px 12px; font-size: 0.7rem; width: auto; margin-right: 5px; }
         .btn-danger { background: var(--danger); color: white; }
-        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); font-size: 0.8rem; padding: 8px; }
 
         .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000; }
         .modal-card { background: var(--card-bg); padding: 2rem; border-radius: 20px; width: 95%; max-width: 450px; position: relative; }
         .modal-card input { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
         
-        /* Modal Tabs */
         .modal-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
         .tab-btn { background: none; border: none; color: #94a3b8; cursor: pointer; font-weight: 600; padding: 5px 10px; }
         .tab-btn.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
@@ -88,6 +93,27 @@
         <h1 style="font-family: 'Playfair Display'; font-size: clamp(2rem, 5vw, 3.5rem);">Omo-Alhaji Art Gallery</h1>
         <p style="opacity: 0.8; letter-spacing: 2px; font-size: 0.8rem;">PREMIUM WALL AFFAIRS • PAINT PRODUCTION</p>
     </header>
+
+    <section id="testimonials">
+        <h2 class="section-title">Client Love</h2>
+        <div class="testimonials-grid">
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>"The Satin Finish Paint transformed my living room completely. Incredible quality!"</p>
+                <span class="client-name">- Mrs. Adebayo</span>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>"Best wallpaper collection in Lagos. The 3D Damask is simply stunning on my office walls."</p>
+                <span class="client-name">- Joshua D.</span>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>"Professional service and top-tier art frames. My gallery looks world-class now."</p>
+                <span class="client-name">- Kunle Alabi</span>
+            </div>
+        </div>
+    </section>
 
     <section id="catalog">
         <h2 class="section-title">The Collection</h2>
@@ -125,19 +151,14 @@
                 <button class="tab-btn active" id="tabCart" onclick="switchTab('cart')">Current Bag</button>
                 <button class="tab-btn" id="tabHistory" onclick="switchTab('history')">Order History</button>
             </div>
-
             <div id="viewCart">
                 <div id="cartItems" style="margin: 10px 0; min-height: 100px;"></div>
                 <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; margin: 15px 0;">Total: ₦0</div>
                 <button class="btn btn-primary" onclick="payWithPaystack()">Checkout with Paystack</button>
             </div>
-
             <div id="viewHistory" style="display: none;">
-                <div id="userOrderList" style="max-height: 300px; overflow-y: auto; font-size: 0.85rem;">
-                    <p style="opacity:0.5; text-align:center; padding: 20px;">Log in to see your orders.</p>
-                </div>
+                <div id="userOrderList" style="max-height: 300px; overflow-y: auto; font-size: 0.85rem;"></div>
             </div>
-
             <button class="btn" onclick="toggleModal('cartModal')" style="color: white; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1);">Close</button>
         </div>
     </div>
@@ -166,13 +187,6 @@
 
         let currentUser = null;
         let isLoginMode = true;
-
-        document.getElementById('switchAuth').onclick = () => {
-            isLoginMode = !isLoginMode;
-            document.getElementById('modalTitle').innerText = isLoginMode ? "Gallery Login" : "Create Account";
-            document.getElementById('authBtn').innerText = isLoginMode ? "Sign In" : "Register";
-            document.getElementById('switchAuth').innerText = isLoginMode ? "New here? Create Account" : "Back to Login";
-        };
 
         document.getElementById('authForm').onsubmit = async (e) => {
             e.preventDefault();
@@ -227,7 +241,6 @@
                         <span>₦${o.total.toLocaleString()}</span>
                     </div>
                     <div style="font-size: 0.75rem; opacity: 0.8;">${o.items}</div>
-                    <div style="font-size: 0.7rem; color: #22c55e;">Status: ${o.status}</div>
                 </div>`;
             });
         }
@@ -256,7 +269,6 @@
             const viewHistory = document.getElementById('viewHistory');
             const tabCart = document.getElementById('tabCart');
             const tabHistory = document.getElementById('tabHistory');
-
             if (target === 'cart') {
                 viewCart.style.display = 'block'; viewHistory.style.display = 'none';
                 tabCart.classList.add('active'); tabHistory.classList.remove('active');
@@ -266,10 +278,7 @@
             }
         };
 
-        window.openCart = () => {
-            switchTab('cart');
-            toggleModal('cartModal');
-        };
+        window.openCart = () => { switchTab('cart'); toggleModal('cartModal'); };
     </script>
 
     <script>
@@ -307,11 +316,9 @@
         function payWithPaystack() {
             if(!cart.length) return alert("Bag is empty");
             const total = cart.reduce((s, i) => s + i.price, 0);
-            const userEmail = window.getCurrentUserEmail();
-
             let handler = PaystackPop.setup({
                 key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', 
-                email: userEmail,
+                email: window.getCurrentUserEmail(),
                 amount: total * 100,
                 callback: (res) => { 
                     saveOrderToDb(res.reference, cart, total);
