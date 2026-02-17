@@ -314,15 +314,33 @@
 
         function payWithPaystack() {
             if(!cart.length) return alert("Bag is empty");
+            
+            // FIX 1: Paystack often fails if the email isn't a real-format email.
+            // This forces a login to ensure we have a valid email for the merchant.
+            const userEmail = window.getCurrentUserEmail();
+            if (userEmail === "guest@omoalhaji.com") {
+                alert("Please Login or Create an Account to complete your purchase.");
+                toggleModal('cartModal');
+                toggleModal('loginModal');
+                return;
+            }
+
             const total = cart.reduce((s, i) => s + i.price, 0);
+
             let handler = PaystackPop.setup({
-                key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', 
-                email: window.getCurrentUserEmail(),
-                amount: total * 100,
+                key: 'pk_test_08092261626cf8814529d479366e6c8888b50209', // Raw key
+                email: userEmail,
+                amount: total * 100, // Amount in kobo
+                currency: "NGN",
                 callback: (res) => { 
                     saveOrderToDb(res.reference, cart, total);
                     alert("Payment Success!"); 
-                    cart = []; updateCart(); switchTab('history');
+                    cart = []; 
+                    updateCart(); 
+                    switchTab('history');
+                },
+                onClose: () => {
+                    alert('Transaction was not completed.');
                 }
             });
             handler.openIframe();
