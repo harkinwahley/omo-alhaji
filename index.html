@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omo-Alhaji | Wall Affairs & General Art </title>
+    <title>Omo-Alhaji | Wall Affairs & General Art</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -42,37 +42,36 @@
 
         .section-title { text-align: center; margin: 4rem 0 2rem; font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--primary); }
         
-        /* Catalog & Services Grid */
         .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; padding: 0 5% 4rem; max-width: 1400px; margin: auto; }
         .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; transition: 0.4s; border: 1px solid rgba(255,255,255,0.05); }
         .card:hover { transform: translateY(-10px); border-color: var(--primary); }
         .card-img { height: 250px; width: 100%; object-fit: cover; }
         .card-info { padding: 1.5rem; }
 
-        /* Services specific styling */
         .service-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
         .service-card { text-align: center; padding: 2.5rem 1.5rem; background: rgba(255,255,255,0.02); }
 
-        /* Admin & Table */
+        /* Review Section */
+        .reviews-section { padding: 4rem 5%; max-width: 1200px; margin: auto; }
+        .review-card { background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--primary); }
+        .stars { color: var(--primary); margin-bottom: 10px; }
+
         #adminSection { display: none; padding: 4rem 5%; background: #000; }
         .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .data-table th, .data-table td { padding: 12px; border: 1px solid #333; text-align: left; font-size: 0.85rem; }
-        .export-btn { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; font-weight: bold; }
+        .data-table th, .data-table td { padding: 12px; border: 1px solid #333; text-align: left; font-size: 0.85rem; color: white; }
 
-        /* Floating WhatsApp */
         .wa-float { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; box-shadow: 0 5px 20px rgba(0,0,0,0.4); transition: 0.3s; }
-        .wa-float:hover { transform: scale(1.15); }
-
-        /* Modals */
+        
         .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000; overflow-y: auto; }
         .modal-card { background: var(--card-bg); padding: 2rem; border-radius: 20px; width: 95%; max-width: 500px; margin: 20px; }
         .modal-card input, .modal-card textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; background: #0f172a; color: white; }
         
         .btn { width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; text-decoration: none; }
         .btn-primary { background: var(--primary); color: var(--bg-dark); }
+        .btn-outline { background: transparent; border: 1px solid #333; color: white; margin-top: 10px; }
         .cart-count { background: var(--primary); color: var(--bg-dark); padding: 2px 6px; border-radius: 50%; font-size: 0.7rem; position: absolute; top: -5px; right: -5px; font-weight: 800; }
         
-        .terms-content { max-height: 200px; overflow-y: auto; font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin: 10px 0; }
+        .about-section { padding: 4rem 5%; background: rgba(255,255,255,0.02); text-align: center; max-width: 1000px; margin: 2rem auto; border-radius: 20px; }
     </style>
 </head>
 <body>
@@ -82,21 +81,22 @@
         <div class="nav-links">
             <a href="#services">Services</a>
             <a href="#catalog">Shop</a>
+            <a href="#reviews">Reviews</a>
             <a href="#about">About</a>
         </div>
-        <div style="display:flex; gap:15px; align-items:center;">
-            <button onclick="openCart()" style="background:none; border:none; color:white; cursor:pointer; position:relative;">
+        <div style="display:flex; gap:10px; align-items:center;">
+            <button onclick="openCart()" style="background:none; border:none; color:white; cursor:pointer; position:relative; margin-right: 5px;">
                 <span class="material-symbols-rounded">shopping_bag</span>
                 <span class="cart-count" id="cartCount">0</span>
             </button>
-            <button id="userBtn" class="btn-primary" style="padding: 6px 15px; border-radius: 50px; font-size: 0.7rem;" onclick="toggleModal('loginModal')">
-                <span id="userBtnText">Login</span>
-            </button>
+            <div id="authContainer">
+                <button class="btn-primary" style="padding: 6px 15px; border-radius: 50px; font-size: 0.7rem; border:none; cursor:pointer;" onclick="toggleModal('loginModal')">Login</button>
+            </div>
         </div>
     </nav>
 
     <header class="hero">
-        <h1 style="font-family: 'Playfair Display'; font-size: clamp(2.5rem, 6vw, 4rem);">Excellence in Every Wall</h1>
+        <h1 style="font-family: 'Playfair Display'; font-size: clamp(2.5rem, 6vw, 4rem);">Wall Affairs & General Arts</h1>
         <p style="letter-spacing: 4px; font-size: 0.8rem; color: var(--primary); text-transform: uppercase;">Aesthetics • Installation • Media</p>
     </header>
 
@@ -105,7 +105,7 @@
     </div>
 
     <section id="services">
-        <h2 class="section-title">Our Professional Services</h2>
+        <h2 class="section-title">SERVICES</h2>
         <div class="grid-layout">
             <div class="card service-card">
                 <span class="material-symbols-rounded service-icon">brush</span>
@@ -130,18 +130,44 @@
         </div>
     </section>
 
+    <section id="about" class="about-section">
+        <h2 class="section-title" style="margin-top:0;">About Us</h2>
+        <p>Omo-Alhaji Wall Affairs & General Art is dedicated to transforming spaces through premium finishes and artistic excellence. From high-quality paint production to sophisticated media branding, we deliver professional results for modern environments.</p>
+    </section>
+
     <section id="catalog">
         <h2 class="section-title">Shop Collection</h2>
         <div class="grid-layout" id="catalogGrid"></div>
     </section>
 
+    <section id="reviews" class="reviews-section">
+        <h2 class="section-title">Customer Reviews</h2>
+        <div class="grid-layout">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"The Satin finish they used on my duplex is breathtaking. Highly recommend Omo-Alhaji!"</p>
+                <small style="display:block; margin-top:10px; opacity:0.6;">— Segun A., Lekki</small>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Got my company branding and office wallpaper done here. Professional and fast."</p>
+                <small style="display:block; margin-top:10px; opacity:0.6;">— Chidi O., VI</small>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★☆</div>
+                <p>"Best quality paints in Lagos. The silk emulsion is so easy to clean."</p>
+                <small style="display:block; margin-top:10px; opacity:0.6;">— Mrs. Adeleke, Ikeja</small>
+            </div>
+        </div>
+    </section>
+
     <section id="adminSection">
         <h2 style="color:var(--primary); margin-bottom:10px;">Global Order Manager</h2>
-        <button class="export-btn" onclick="exportOrdersCSV()">Download CSV Report</button>
+        <button class="btn btn-primary" onclick="exportOrdersCSV()" style="width:auto; padding:10px 20px; margin-bottom:20px;">Download CSV Report</button>
         <div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>Date</th><th>Customer</th><th>Phone</th><th>Address</th><th>Items</th><th>Total</th></tr></thead><tbody id="adminOrderTable"></tbody></table></div>
     </section>
 
-    <a href="https://wa.me/2348135942500?text=Hello%20Omo-Alhaji,%20I'm%20enquiring%20about%20your%20services:%20Graphic%20Design,%20Installation,%20Painting,%20Printing,%20Branding,%20Media,%20and%20Entertainment." class="wa-float" target="_blank">
+    <a href="https://wa.me/2348135942500?text=Hello%20Omo-Alhaji,%20I'm%20enquiring%20about%20your%20services." class="wa-float" target="_blank">
         <svg width="35" height="35" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.63 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
 
@@ -149,59 +175,18 @@
         <p>&copy; 2026 Omo-Alhaji Wall Affairs. <a href="javascript:void(0)" onclick="toggleModal('termsModal')" style="color:var(--primary); text-decoration: none;">Terms & Conditions</a></p>
     </footer>
 
-    <div class="modal-overlay" id="cartModal">
-        <div class="modal-card">
-            <h2 style="color:var(--primary)">Shopping Bag</h2>
-            <div id="cartItems" style="margin: 20px 0;"></div>
-            <div id="cartTotal" style="font-size: 1.5rem; font-weight: 800; border-top: 1px solid #333; padding-top: 10px;">Total: ₦0</div>
-            
-            <div id="checkoutForm" style="display:none; margin-top: 20px;">
-                <input type="text" id="custName" placeholder="Name">
-                <input type="tel" id="custPhone" placeholder="Phone">
-                <textarea id="custAddr" placeholder="Delivery Address" rows="2"></textarea>
-                <div style="font-size: 0.75rem; margin-bottom: 10px; display:flex; gap:8px;">
-                    <input type="checkbox" id="agreeTerms"> <span>I agree to <a href="javascript:void(0)" onclick="toggleModal('termsModal')" style="color:var(--primary)">Terms</a></span>
-                </div>
-                <button class="btn btn-primary" onclick="startPayment()">Pay Now</button>
-            </div>
-            <button class="btn btn-primary" id="proceedBtn" onclick="showCheckout()" style="margin-top:20px;">Checkout</button>
-            <button class="btn" onclick="toggleModal('cartModal')" style="color:#64748b">Close</button>
-        </div>
-    </div>
+    <div class="modal-overlay" id="cartModal"><div class="modal-card"><h2 style="color:var(--primary)">Shopping Bag</h2><div id="cartItems" style="margin:20px 0;"></div><div id="cartTotal" style="font-size:1.5rem; font-weight:800; border-top:1px solid #333; padding-top:10px;">Total: ₦0</div><div id="checkoutForm" style="display:none; margin-top:20px;"><input type="text" id="custName" placeholder="Name"><input type="tel" id="custPhone" placeholder="Phone"><textarea id="custAddr" placeholder="Delivery Address" rows="2"></textarea><div style="font-size:0.75rem; margin-bottom:10px; display:flex; gap:8px;"><input type="checkbox" id="agreeTerms"> <span>I agree to <a href="javascript:void(0)" onclick="toggleModal('termsModal')" style="color:var(--primary)">Terms</a></span></div><button class="btn btn-primary" onclick="startPayment()">Pay Now</button></div><button class="btn btn-primary" id="proceedBtn" onclick="showCheckout()" style="margin-top:20px;">Checkout</button><button class="btn" onclick="toggleModal('cartModal')" style="color:#64748b">Close</button></div></div>
 
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal-card">
-            <h2>Login</h2>
-            <form id="authForm"><input type="email" id="email" placeholder="Email" required><input type="password" id="pass" placeholder="Password" required><button type="submit" class="btn btn-primary">Enter</button></form>
-            <button class="btn" onclick="toggleModal('loginModal')">Cancel</button>
-        </div>
-    </div>
+    <div class="modal-overlay" id="loginModal"><div class="modal-card"><h2>Login</h2><form id="authForm"><input type="email" id="email" placeholder="Email" required><input type="password" id="pass" placeholder="Password" required><button type="submit" class="btn btn-primary">Enter</button></form><button class="btn btn-outline" onclick="toggleModal('loginModal')">Cancel</button></div></div>
 
-    <div class="modal-overlay" id="termsModal">
-        <div class="modal-card">
-            <h2>Terms & Conditions</h2>
-            <div class="terms-content">
-                <p>1. Payments are non-refundable for custom-mixed paint colors.</p><br>
-                <p>2. Delivery within Lagos takes 3-5 working days.</p><br>
-                <p>3. Service fees for installation are calculated separately from product price.</p>
-            </div>
-            <button class="btn btn-primary" onclick="toggleModal('termsModal')">I Agree</button>
-        </div>
-    </div>
+    <div class="modal-overlay" id="termsModal"><div class="modal-card"><h2>Terms & Conditions</h2><div style="font-size:0.85rem; margin:15px 0;">1. Payments for custom paints are non-refundable.<br><br>2. Delivery: 3-5 working days in Lagos.<br><br>3. Installation fees are separate from product costs.</div><button class="btn btn-primary" onclick="toggleModal('termsModal')">I Agree</button></div></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCWv4pF_5hVBqYLl4MZIvndWq5slckZ-1E",
-            authDomain: "omo-alhaji.firebaseapp.com",
-            projectId: "omo-alhaji",
-            storageBucket: "omo-alhaji.firebasestorage.app",
-            messagingSenderId: "373858886528",
-            appId: "1:373858886528:web:fac1898e827bc08d26d765"
-        };
+        const firebaseConfig = { apiKey: "AIzaSyCWv4pF_5hVBqYLl4MZIvndWq5slckZ-1E", authDomain: "omo-alhaji.firebaseapp.com", projectId: "omo-alhaji", storageBucket: "omo-alhaji.firebasestorage.app", messagingSenderId: "373858886528", appId: "1:373858886528:web:fac1898e827bc08d26d765" };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -214,11 +199,24 @@
             toggleModal('loginModal');
         };
 
+        window.logout = async () => {
+            await signOut(auth);
+            location.reload(); 
+        };
+
         onAuthStateChanged(auth, (user) => {
+            const authContainer = document.getElementById('authContainer');
             if(user) {
                 userEmail = user.email;
-                document.getElementById('userBtnText').innerText = user.email.split('@')[0].toUpperCase();
+                authContainer.innerHTML = `
+                    <div style="display:flex; flex-direction:column; align-items:flex-end;">
+                        <span style="font-size:0.7rem; color:var(--primary); font-weight:800;">${user.email.split('@')[0].toUpperCase()}</span>
+                        <button onclick="logout()" style="background:none; border:none; color:white; font-size:0.6rem; cursor:pointer; text-decoration:underline; padding:0;">Logout</button>
+                    </div>`;
                 if(user.email === "femidadajoshua@gmail.com") { document.getElementById('adminSection').style.display = 'block'; loadOrders(); }
+            } else {
+                authContainer.innerHTML = `<button class="btn-primary" style="padding: 6px 15px; border-radius: 50px; font-size: 0.7rem; border:none; cursor:pointer;" onclick="toggleModal('loginModal')">Login</button>`;
+                document.getElementById('adminSection').style.display = 'none';
             }
         });
 
